@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>canvas钟表</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background-color: pink;
+    }
+    #clock {
+      background-color: gray;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%)
+    }
+  </style>
+</head>
+<body>
+  <canvas id="clock" width="400px" height="400px"></canvas>
+  <script>
+    window.onload = function () {
+      let clock = document.querySelector('#clock')
+      if (clock.getContext) {
+        let ctx = clock.getContext('2d')
+        
+        ctx.save()
+        ctx.lineWidth = 8
+		  	ctx.strokeStyle = "black"
+		  	ctx.lineCap = "round"
+        ctx.translate(200,200)
+        ctx.rotate(270*Math.PI/180)
+        
+        // 外层空心圆盘
+        ctx.save()
+        ctx.lineWidth = 14
+		  	ctx.strokeStyle = "#325FA2"
+        ctx.beginPath()
+        ctx.arc(0,0,140,0,360)
+        ctx.stroke()
+        ctx.restore()
+
+        // 时针刻度
+        ctx.save()
+        for (let i = 0; i < 12; i++) {
+          ctx.rotate(30*Math.PI/180)
+          ctx.beginPath()
+          ctx.moveTo(120,0)
+          ctx.lineTo(100,0)  
+          ctx.stroke()   
+        }
+        ctx.restore()
+
+        // 分针刻度
+        ctx.save()
+        ctx.lineWidth = 4
+        for (let i = 0; i < 60; i++) {
+          ctx.rotate(6*Math.PI/180)
+          if ((i+1) % 5 != 0) {
+            ctx.beginPath()
+            ctx.moveTo(120,0)
+            ctx.lineTo(117,0)
+            ctx.stroke()
+          }
+        }
+
+        // 时针 分针 秒针
+        let date = new Date()
+        console.log(date);
+        ctx.restore()
+      }
+    }
+  </script>
+</body>
+</html>
