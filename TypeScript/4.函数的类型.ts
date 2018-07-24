@@ -11,7 +11,7 @@ let mySum1 = function (x: number, y: number): number {
 // 果需要我们手动给 mySum 添加类型，则应该是这样：
 let mySum2: (x: number, y: number) => number = function (x: number
 , y: number): number {
-return x + y;
+  return x + y;
 };
 
 // 注意不要混淆了 TypeScript 中的 => 和 ES6 中的 =>
