@@ -27,6 +27,19 @@ const enum Directions {
 let directions = [Directions.Up, Directions.Down, Directions.Left, Directions.Right];
 // 编译结果
 // var directions = [0 /* Up */, 1 /* Down */, 2 /* Left */, 3 /* Right */];
-// 常数枚举与普通枚举的区别是，它会在编译阶段被删除，并且不能包含计算成员。
+
+// 外部枚举（Ambient Enums）是使用  declare enum  定义的枚举类型
+declare enum Directions2 {
+  Up,
+  Down,
+  Left,
+  Right
+  }
+  let directions2 = [Directions.Up, Directions.Down, Directions.Left, Directions.Right];
+
+  // 之前提到过， declare  定义的类型只会用于编译时的检查，编译结果中会被删除。
+  // 上例的编译结果是：
+  var directions3 = [Directions.Up, Directions.Down, Directions.Left, Directions.Right];
+  // 外部枚举与声明语句一样，常出现在声明文件中。
 
 
