@@ -32,6 +32,19 @@
         5). 深拷贝包含函数数据的对象/数组
 -->
 <script type="text/javascript">
+  /*
+  * 思考: 
+  *     如何实现深度克隆
+  *     拷贝的数据里不能有对象/数组 
+  *     有对象/数组就继续遍历对象、数组,拿到里面的每一项,一直到拿到的都是基本数据类型,然后再去复制
+  * */
+
+  // 如何判断对象的数据类型 arr ---> Array, null ---> Null
+  // 1.typeof返回的数据类型: String,Number,Boolean,Undefined,Object(null看作空对象),Function
+  // 2.Object.prototype.isString.call(obj)
+
+  // for in 循环 对象i--->属性名 数组i--->下标
+
   // 复制的对象的方式
   // 浅度复制
   let obj = {username: 'kobe', age: 39, sex: {option1: '男', option2: '女'}};
@@ -49,9 +62,9 @@
   console.log(obj2, obj);
 
   // 深度克隆(复制)
-
-  function getObjClass(obj) {
-    let result = Object.prototype.toString.call(obj).slice(8, -1);
+  // 定义检测数据类型的功能函数
+  function checkedType(target) {
+    let result = Object.prototype.toString.call(target).slice(8, -1);
     if(result === 'Null'){
       return 'Null';
     }else if(result === 'Undefined'){
@@ -67,22 +80,27 @@
   }
 
   // 深度克隆
-  function deepClone(obj) {
-    let result, objClass = getObjClass(obj);
+  function deepClone(target) {
+    // 判断拷贝的数据类型
+    // 初始化变量result 成为最终克隆的数据
+    let result, objClass = checkedType(target);
     if(objClass === 'Object'){
       result = {};
     }else if(objClass === 'Array'){
       result = [];
     }else {
-      return obj; // 如果是其他数据类型不复制，直接将数据返回
+      return target; // 如果是其他数据类型不复制，直接将数据返回
     }
     // 遍历目标对象
-    for(let key in obj){
-      let value = obj[key];
-      if(getObjClass(value) === "Object" || 'Array'){
-        result[key] = deepClone(value);
+    for(let i in target){
+      // 获取遍历数据结构的每一项值
+      let value = target[i];
+      // 判断目标结构里的每一项值是否存在对象或数组
+      if(checkedType(value) === 'Object' || 'Array'){
+        // 继续遍历获取到的value值
+        result[i] = deepClone(value);
       }else {
-        result[key] = obj[key];
+        result[i] = value;
       }
     }
     return result;

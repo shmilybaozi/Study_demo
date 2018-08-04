@@ -42,26 +42,26 @@
 
     computed: {
       filterPersons () {
-//        debugger
         // 取出相关数据
         const {searchName, persons, orderType} = this
-        let arr = [...persons]
-        // 过滤数组
-        if(searchName.trim()) {
-          arr = persons.filter(p => p.name.indexOf(searchName)!==-1)
-        }
-        // 排序
-        if(orderType) {
-          arr.sort(function (p1, p2) {
-            if(orderType===1) { // 降序
-              return p2.age-p1.age
-            } else { // 升序
-              return p1.age-p2.age
-            }
 
-          })
+        // 最终需要显示的数组
+        let fPersons
+        // 过滤
+        fPersons = persons.filter(p => p.name.indexOf(searchName) !== -1)
+        // 排序
+        if (orderType !== 0) {
+          // 如果返回负数p1在前, 如果返回正数p2在前
+          fPersons.sort(function (p1,p2) {
+            // 1代表降序, 2代表升序
+            if (orderType === 1) {
+              return p1.age -p2.age
+            } else {
+              return p2.age -p1.age
+            }
+          })  
         }
-        return arr
+        return fPersons
       }
     },
 
