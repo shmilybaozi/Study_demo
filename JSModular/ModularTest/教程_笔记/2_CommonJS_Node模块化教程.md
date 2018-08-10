@@ -8,7 +8,7 @@
     |-module2.js
     |-module3.js
   |-app.js
-  |-package.json
+  |-package.json //必须有名字(不能有中文不能有大写字母)和版本号
     {
       "name": "commonJS-node",
       "version": "1.0.0"

@@ -1,10 +1,11 @@
+<!-- markdownlint-disable -->
 ## require.js使用教程
 1. 下载require.js, 并引入
   * 官网: http://www.requirejs.cn/
   * github : https://github.com/requirejs/requirejs
   * 将require.js导入项目: js/libs/require.js 
 2. 创建项目结构
-  ```
+  ```bash
   |-js
     |-libs
       |-require.js
@@ -16,7 +17,7 @@
   ```
 3. 定义require.js的模块代码
   * dataService.js
-    ```
+    ```js
     define(function () {
       let msg = 'atguigu.com'
     
@@ -28,7 +29,7 @@
     })
     ```
   * alerter.js
-    ```
+    ```js
     define(['dataService', 'jquery'], function (dataService, $) {
       let name = 'Tom2'
     
@@ -41,7 +42,7 @@
     })
     ```
 4. 应用主(入口)js: main.js
-  ```
+  ```js
   (function () {
     //配置
     requirejs.config({
@@ -70,13 +71,13 @@
   * 将jquery的库文件导入到项目: 
     * js/libs/jquery-1.10.1.js
   * 在main.js中配置jquery路径
-    ```
+    ```js
     paths: {
               'jquery': 'libs/jquery-1.10.1'
           }
     ```
   * 在alerter.js中使用jquery
-    ```
+    ```js
     define(['dataService', 'jquery'], function (dataService, $) {
         var name = 'xfzhang'
         function showMsg() {
@@ -93,7 +94,7 @@
     * js/libs/angular.js
    
   * 在main.js中配置
-    ```
+    ```js
     (function () {
       require.config({
         //基本路径

@@ -1,4 +1,5 @@
 /**
+ * 将其他模块汇集到主模块
   1. 定义暴露模块:
     module.exports = value;
     exports.xxx = value;

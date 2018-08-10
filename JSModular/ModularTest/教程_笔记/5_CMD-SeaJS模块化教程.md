@@ -1,10 +1,11 @@
+<!-- markdownlint-disable -->
 ## sea.js简单使用教程
 1. 下载sea.js, 并引入
   * 官网: http://seajs.org/
   * github : https://github.com/seajs/seajs
   * 将sea.js导入项目: js/libs/sea.js 
 2. 创建项目结构
-  ```
+  ```bash
   |-js
     |-libs
       |-sea.js
@@ -18,7 +19,7 @@
   ```
 3. 定义sea.js的模块代码
   * module1.js
-    ```
+    ```js
     define(function (require, exports, module) {
       //内部变量数据
       var data = 'atguigu.com'
@@ -32,7 +33,7 @@
     })
     ```
   * module2.js
-    ```
+    ```js
     define(function (require, exports, module) {
       module.exports = {
         msg: 'I Will Back'
@@ -40,14 +41,14 @@
     })
     ```
   * module3.js
-    ```
+    ```js
     define(function (require, exports, module) {
       const API_KEY = 'abc123'
       exports.API_KEY = API_KEY
     })
     ```
   * module4.js
-    ```
+    ```js
     define(function (require, exports, module) {
       //引入依赖模块(同步)
       var module2 = require('./module2')
@@ -64,7 +65,7 @@
     })
     ```
   * main.js : 主(入口)模块
-    ```
+    ```js
     define(function (require) {
       var m1 = require('./module1')
       var m4 = require('./module4')
@@ -73,7 +74,7 @@
     })
     ```
 4. index.html:
-  ```
+  ```html
   <!--
   使用seajs:
     1. 引入sea.js库
