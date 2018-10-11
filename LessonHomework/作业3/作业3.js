@@ -15,27 +15,28 @@ var sum = function (array) {
     // 用变量 n 保存元素值
     var n = array[i]
     // 累加到变量 s
-    s = s + n
+    s += n
   }
   // 循环结束, 现在 s 里面存的是数组中所有元素的和了
   return s
 }
-
-
-// 用于测试的套路, 照抄即可
-var ensure = function (condition, message) {
-  if (!condition) {
-    console.log(message)
-  }
-}
-
 
 // 作业 1
 // 参数是一个只包含数字的 array
 // 求 array 的乘积
 // 函数定义是
 var product = function (array) {
-
+  // 先设置一个变量用来存 乘积
+  var s = 1
+  // 遍历数组
+  for (var i = 0; i < array.length; i++) {
+    // 用变量 n 保存元素值
+    var n = array[i]
+    // 累加到变量 s
+    s *= n
+  }
+  // 循环结束, 现在 s 里面存的是数组中所有元素的乘积了
+  return s
 }
 
 
