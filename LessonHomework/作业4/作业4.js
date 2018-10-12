@@ -48,12 +48,14 @@ s1 s2 都是 string
 返回 s2 在 s1 中的下标, 从 0 开始, 如果不存在则返回 -1
 */
 var find = function (s1, s2) {
-  
+  for (let i = 0; i < s1.length; i++) {
+    const n = s1[i];
+    if (n === s2) {
+      return i
+    }
+  }
+  return -1
 }
-
-// 测试函数, 自行实现
-var test_find = function () {}
-
 
 /*
 下面给出一个例子作为后面作业的参考
@@ -89,7 +91,15 @@ var lowercase = function (s) {
 */
 
 var uppercase = function (s) {
-  
+  // 初始化一个空字符串
+  var result = ""
+  for (var i = 0; i < s.length; i++) {
+    // 注意, 这个 find 是你要实现的函数
+    var index = find(lower, s[i])
+    // 字符串可以用加号拼接, 不明白可以 log 一下
+    result += upper[index]
+  }
+  return result
 }
 
 
@@ -100,8 +110,19 @@ var uppercase = function (s) {
 它能正确处理带 小写字母 的字符串
 */
 var lowercase1 = function (s) {
- 
+  var result = ""
+  for (var i = 0; i < s.length; i++) {
+    var indexLower = find(lower, s[i])
+    if (indexLower !== -1) {
+      result += lower[indexLower]
+    } else {
+      var index = find(upper, s[i])
+      result += lower[index]
+    }
+  }
+  return result
 }
+
 
 
 /*
@@ -111,7 +132,17 @@ var lowercase1 = function (s) {
 它能正确处理带 大写字母 的字符串
 */
 var uppercase1 = function (s) {
-  
+  var result = ""
+  for (var i = 0; i < s.length; i++) {
+    var indexUp = find(upper, s[i])
+    if (indexUp !== -1) {
+      result += upper[indexUp]
+    } else {
+      var index = find(lower, s[i])
+      result += upper[index]
+    }
+  }
+  return result
 }
 
 
@@ -125,11 +156,44 @@ var uppercase1 = function (s) {
 右移 1 位
 */
 var shiftedChar = function (char, n) {
- 
+  /*
+  返回字符 char 偏移 n 位后的字符
+  */
+  // 创建字母表
+  var lower = 'abcdefghijklmnopqrstuvwxyz'
+  var upper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+  // 先看看是不是大写字符
+  // 这里我们只考虑是字符的情况
+  var index = find(upper, char)
+  if (index > -1) {
+    // 这是 大写字符
+    // 算出偏移后的下标
+    // + 26 是为防止左移的时候下标小于 0
+    var newIndex = (index + n + 26) % 26
+    // console.log('upper char', index, char)
+    return upper[newIndex]
+  } else {
+    index = find(lower, char)
+    if (index > -1) {
+      // 这是小写字母
+      var newIndex = (index + n + 26) % 26
+      // log('lower char', index, char)
+      return lower[newIndex]
+    } else {
+      // 不是字母, 直接返回
+      return char
+    }
+  }
 }
 
 var encode1 = function (s) {
-  
+  var result = ''
+  for (let i = 0; i < s.length; i++) {
+    const char = s[i];
+    var code = shiftedChar(s[i], 1)
+    result  += code
+  }
+  return result
 }
 
 
@@ -138,7 +202,13 @@ var encode1 = function (s) {
 实现 decode1 函数, 把作业 5 加密的密码解密为明文并返回
 */
 var decode1 = function (s) {
-  
+  var result = ''
+  for (let i = 0; i < s.length; i++) {
+    const char = s[i];
+    var code = shiftedChar(s[i], -1)
+    result  += code
+  }
+  return result
 }
 
 
@@ -148,7 +218,13 @@ var decode1 = function (s) {
 多了一个参数 shift 表示移的位数
 */
 var encode2 = function (s, shift) {
-  
+  var result = ''
+  for (let i = 0; i < s.length; i++) {
+    const char = s[i];
+    var code = shiftedChar(s[i], shift)
+    result  += code
+  }
+  return result
 }
 
 
@@ -158,7 +234,13 @@ var encode2 = function (s, shift) {
 多了一个参数 shift 表示移的位数
 */
 var decode2 = function (s, shift) {
-  
+  var result = ''
+  for (let i = 0; i < s.length; i++) {
+    const char = s[i];
+    var code = shiftedChar(s[i], -shift)
+    result  += code
+  }
+  return result
 }
 
 
@@ -169,7 +251,13 @@ var decode2 = function (s, shift) {
 如果 s 中包含了不是字母的字符, 比如空格或者其他符号, 则对这个字符不做处理保留原样
 */
 var encode3 = function (s, shift) {
-  
+  var result = ''
+  for (let i = 0; i < s.length; i++) {
+    const char = s[i];
+    var code = shiftedChar(s[i], shift)
+    result  += code
+  }
+  return result
 }
 
 
@@ -180,7 +268,13 @@ var encode3 = function (s, shift) {
 如果 s 中包含了不是字母的字符, 比如空格或者其他符号, 则对这个字符不做处理保留原样
 */
 var decode3 = function (s, shift) {
-  
+  var result = ''
+  for (let i = 0; i < s.length; i++) {
+    const char = s[i];
+    var code = shiftedChar(s[i], -shift)
+    result  += code
+  }
+  return result
 }
 
 
@@ -195,8 +289,14 @@ https://www.zhihu.com/question/28324597
 */
 var code = 'VRPHWLPHV L ZDQW WR FKDW ZLWK BRX,EXW L KDYH QR UHDVRQ WR FKDW ZLWK BRX'
 
-var decode4 = function (s) {
-  
+var decode4 = function (s, shift) {
+  var result = ''
+  for (let i = 0; i < s.length; i++) {
+    const char = s[i];
+    var code = shiftedChar(s[i], -shift)
+    result  += code
+  }
+  return result
 }
 
 
