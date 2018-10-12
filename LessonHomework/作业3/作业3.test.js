@@ -1,10 +1,11 @@
-// 用于测试的套路, 照抄即可
+// 判断条件符合
 var ensure = function (condition, message) {
   if (!condition) {
     console.log(message)
   }
 }
 
+// 判断数字相等
 var ensureEqual = function (a, b, message) {
   if (a != b) {
     console.log(message,'| a:', a, 'b:', b)
@@ -95,7 +96,7 @@ var textApplyOps = function() {
 // 不要在程序最外层运行任何代码, 只应该有定义, 不应该有执行
 // 主函数: 在统一的地方执行代码
 var __main = function() {
-  console.log('主函数执行')
+  console.log('主函数执行开始')
   textSum()
   textProduct()
   textAbs()
