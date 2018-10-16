@@ -19,8 +19,8 @@
 
 
 // 定义我们的 log 函数
-var log = function() {
-    console.log.apply(console, arguments)
+var log = function () {
+  console.log.apply(console, arguments)
 }
 
 
@@ -32,108 +32,125 @@ var log = function() {
 // ensure 接受两个参数
 // condition 是 bool, 如果为 false, 则输出 message
 // 否则, 不做任何处理
-var ensure = function(condition, message) {
-    // 在条件不成立的时候, 输出 message
-    if(!condition) {
-        log('*** 测试失败 {', message)
-    }
+var ensure = function (condition, message) {
+  // 在条件不成立的时候, 输出 message
+  if (!condition) {
+    log('*** 测试失败 {', message)
+  }
 }
 
 // 定义一个增强的 ensureEqual
-var ensureEqual = function(a, b, message) {
-    if (a != b) {
-        log(`*** 测试失败, ${a} 不等于 ${b}, ${message}`)
-    }
+var ensureEqual = function (a, b, message) {
+  if (a != b) {
+    log(`*** 测试失败, ${a} 不等于 ${b}, ${message}`)
+  }
 }
 
 
 // 作业 1
 // 实现函数
 // 多看提示多讨论
-var join = function(delimiter, array) {
-    /*
-    delimiter 是 string
-    array 是包含 string 的 array
+var join = function (delimiter, array) {
+  /*
+  delimiter 是 string
+  array 是包含 string 的 array
 
-    把 array 中的元素用 delimiter 连接成一个字符串并返回
-    具体请看测试
-    */
-    
-}
-
-var test_join = function() {
-    ensure(join('#', ['hello', 'gua']) == 'hello#gua', 'join 测试 1')
-    ensure(join(' ', ['hello', 'gua']) == 'hello gua', 'join 测试 2')
-    ensure(join('\n', ['multi', 'line', 'string']) == 'multi\nline\nstring', 'join 测试 3')
+  把 array 中的元素用 delimiter 连接成一个字符串并返回
+  具体请看测试
+  */
+  var str = array[0]
+  for (let i = 1; i < array.length; i++) {
+    const el = array[i];
+    str = str + delimiter + el
+  }
+  return str
 }
 
 
 // 作业 2
 // 实现函数
-var split = function(s, delimiter=' ') {
-    /*
-    s 是 string
-    delimiter 是 string, 默认为空格 ' '
+var split = function (s, delimiter = ' ') {
+  /*
+  s 是 string
+  delimiter 是 string, 默认为空格 ' '
 
-    以 delimiter 为分隔符号, 返回一个 array
-    例如
-    split('1 2 3') 返回 ['1', '2', '3']
-    split('a=b&c=d', '&') 返回 ['a=b', 'c=d']
-    注意, 测试 array 是否相等得自己写一个函数用循环来跑
+  以 delimiter 为分隔符号, 返回一个 array
+  例如
+  split('1 2 3') 返回 ['1', '2', '3']
+  split('a=b&c=d', '&') 返回 ['a=b', 'c=d']
+  注意, 测试 array 是否相等得自己写一个函数用循环来跑
 
-     0123456789
-    'a=bc=def'
-    [0, 1, 4, s.length]
-    (0, 1)
-    (1, 4)
-    (4, s.length)
-    */
-   
+   0123456789
+  'a=bc=def'
+  [0, 1, 4, s.length]
+  (0, 1)
+  (1, 4)
+  (4, s.length)
+  */
+  var arr = []
+  // space 是分隔符的长度, 因为分隔符不一定长度为 1
+  var space = delimiter.length
+  // start 用来存储每次的开始下标
+  var start = 0
+  for (let i = 0; i < s.length; i++) {
+    const el = s.slice(i, i+space);
+    if (el === delimiter) {
+      var str1 = s.slice(start, i)
+      arr.push(str1)
+      // 设置新的开始下标
+      start = i + space
+    }
+  }
+  var last = s.slice(start)
+  arr.push(last)
+  console.log(arr);
+  return arr
 }
+
 
 
 // 作业 3
 // 实现函数
-var replaceAll = function(s, old, newString) {
-    /*
-    s old newString 都是 string
-    返回一个「将 s 中出现的所有 old 字符串替换为 new 字符串」的字符串
-    */
-    // 很简单, 对吧?
-   
+var replaceAll = function (s, old, newString) {
+  /*
+  s old newString 都是 string
+  返回一个「将 s 中出现的所有 old 字符串替换为 new 字符串」的字符串
+  */
+  // 很简单, 对吧?
+
 }
 
 
 // 作业 4
 // 实现函数
-var str1 = function(n) {
-    /*
-    n 是 int
-    返回这样规律的字符串, 特殊情况不考虑
-    n       返回值
-    1       '1'
-    2       '121'
-    3       '12321'
+var str1 = function (n) {
+  /*
+  n 是 int
+  返回这样规律的字符串, 特殊情况不考虑
+  n       返回值
+  1       '1'
+  2       '121'
+  3       '12321'
 
-    1-n
-    (n-1)-1
-    */
-    
+  1-n
+  (n-1)-1
+  */
+
 }
 
 
 // 作业 5
 // 实现函数
-var str2 = function(n) {
-    /*
-    n 是 int
-    返回这样规律的字符串, 特殊情况不考虑
-    n       返回值
-    1       'A'
-    2       'ABA'
-    3       'ABCBA'
-    */
-    
+var str2 = function (n) {
+  /*
+  n 是 int
+  返回这样规律的字符串, 特殊情况不考虑
+  n       返回值
+  1       'A'
+  2       'ABA'
+  3       'ABCBA'
+  */
+
 }
 
 
@@ -141,249 +158,249 @@ var str2 = function(n) {
 // 实现加法口诀表
 //
 // 辅助函数
-var addLine = function(number) {
-    var s = ''
-    for (var i = 0; i < number; i++) {
-        var n = i + 1
-        s += `${number} + ${n} = ${number+n}  `
-    }
-    return s
+var addLine = function (number) {
+  var s = ''
+  for (var i = 0; i < number; i++) {
+    var n = i + 1
+    s += `${number} + ${n} = ${number+n}  `
+  }
+  return s
 }
 
-var addTable = function() {
-    /*
-    返回这样格式的加法口诀表(没写全, 但是要返回完整的)
-    注意, 这只是我输入的内容
-    实际上你普通 log 出来是不会有回车的
-    [
-        '1 + 1 = 2',
-        '2 + 1 = 3  2 + 2 = 4',
-        '3 + 1 = 4  3 + 2 = 5  3 + 3 = 6',
-    ]
-    */
-    
+var addTable = function () {
+  /*
+  返回这样格式的加法口诀表(没写全, 但是要返回完整的)
+  注意, 这只是我输入的内容
+  实际上你普通 log 出来是不会有回车的
+  [
+      '1 + 1 = 2',
+      '2 + 1 = 3  2 + 2 = 4',
+      '3 + 1 = 4  3 + 2 = 5  3 + 3 = 6',
+  ]
+  */
+
 }
 
 
 // 作业 7
 // 实现函数
-var range1 = function(start, end) {
-    /*
-    start end 都是 int
+var range1 = function (start, end) {
+  /*
+  start end 都是 int
 
-    返回一个 array, 假设 start 为 1, end 为 5, 返回数据如下
-    [1, 2, 3, 4]
-    */
-    
+  返回一个 array, 假设 start 为 1, end 为 5, 返回数据如下
+  [1, 2, 3, 4]
+  */
+
 }
 
 
 // 作业 8
 // 实现函数
-var range2 = function(start, end, step=1) {
-    /*
-    start end step 都是数字
-    step 是大于 0 的正整数
+var range2 = function (start, end, step = 1) {
+  /*
+  start end step 都是数字
+  step 是大于 0 的正整数
 
-    返回一个 array
-    假设 start=1, end=5, step=1 返回数据如下
-    [1, 2, 3, 4]
-    假设 start=0, end=6, step=2 返回数据如下
-    [0, 2, 4]
-    */
-    
+  返回一个 array
+  假设 start=1, end=5, step=1 返回数据如下
+  [1, 2, 3, 4]
+  假设 start=0, end=6, step=2 返回数据如下
+  [0, 2, 4]
+  */
+
 }
 
 
 // 作业 9
 // 实现函数
-var stepCondition = function(current, end, step) {
-    if (step > 0) {
-        return current < end
-        // 下面两种是经常能看到的反例
-        // if(current < end) {
-        //     return true
-        // } else {
-        //     return false
-        // }
-        // return current < end ? true : false
-    } else {
-        return current > end
-    }
+var stepCondition = function (current, end, step) {
+  if (step > 0) {
+    return current < end
+    // 下面两种是经常能看到的反例
+    // if(current < end) {
+    //     return true
+    // } else {
+    //     return false
+    // }
+    // return current < end ? true : false
+  } else {
+    return current > end
+  }
 }
 
-var range3 = function(start, end, step=1) {
-    /*
-    start end step 都是数字
+var range3 = function (start, end, step = 1) {
+  /*
+  start end step 都是数字
 
-    和 range2 一样, 但是要求支持负数 step
-    使用 while 循环
-    返回一个 array
-    假设 start=1, end=5, step=1 返回数据如下
-    [1, 2, 3, 4]
-    假设 start=6, end=0, step=-1 返回数据如下
-    [6, 5, 4, 3, 2, 1]
-    */
-    
+  和 range2 一样, 但是要求支持负数 step
+  使用 while 循环
+  返回一个 array
+  假设 start=1, end=5, step=1 返回数据如下
+  [1, 2, 3, 4]
+  假设 start=6, end=0, step=-1 返回数据如下
+  [6, 5, 4, 3, 2, 1]
+  */
+
 }
 
 
 // 作业 10
 // 实现函数
-var random01 = function() {
-    /*
-    js 标准数学库有一个随机数函数
-    Math.random()
-    它返回 0 - 1 之间的小数
+var random01 = function () {
+  /*
+  js 标准数学库有一个随机数函数
+  Math.random()
+  它返回 0 - 1 之间的小数
 
-    用它实现本函数, 返回 0 或 1
-    */
-   
+  用它实现本函数, 返回 0 或 1
+  */
+
 }
 
 
 // 作业 11
 // 实现函数
-var randomLine01 = function(n) {
-    /*
-    返回一个只包含了 0 1 的随机 array, 长度为 n
-    假设 n 为 5, 返回的数据格式如下(这是格式范例, 真实数据是随机的)
-    [0, 0, 1, 0, 1]
-    */
-    
+var randomLine01 = function (n) {
+  /*
+  返回一个只包含了 0 1 的随机 array, 长度为 n
+  假设 n 为 5, 返回的数据格式如下(这是格式范例, 真实数据是随机的)
+  [0, 0, 1, 0, 1]
+  */
+
 }
 
 
 // 作业 12
-var randomSquare01 = function(n) {
-    /*
-    返回以下格式的数据
-    假设 n 为 3, 返回的数据格式如下(这是格式范例, 真实数据是随机的)
-    注意, 这只是一个 array, 并不是它显示的样子
-    注意, 这是一个 array 不是 string
-    [
-        [0, 0, 1],
-        [1, 0, 1],
-        [0, 0, 0],
-    ]
-    返回, 包含了 n 个『只包含 n 个「随机 0 1」的 array』的 array
-    */
-    
+var randomSquare01 = function (n) {
+  /*
+  返回以下格式的数据
+  假设 n 为 3, 返回的数据格式如下(这是格式范例, 真实数据是随机的)
+  注意, 这只是一个 array, 并不是它显示的样子
+  注意, 这是一个 array 不是 string
+  [
+      [0, 0, 1],
+      [1, 0, 1],
+      [0, 0, 0],
+  ]
+  返回, 包含了 n 个『只包含 n 个「随机 0 1」的 array』的 array
+  */
+
 }
 
 
 // 作业 13
-var randomLine09 = function(n) {
-    /*
-    返回一个只包含了 0 9 的随机 array, 长度为 n
-    假设 n 为 5, 返回的数据格式如下(这是格式范例, 真实数据是随机的)
-    [0, 0, 9, 0, 9]
+var randomLine09 = function (n) {
+  /*
+  返回一个只包含了 0 9 的随机 array, 长度为 n
+  假设 n 为 5, 返回的数据格式如下(这是格式范例, 真实数据是随机的)
+  [0, 0, 9, 0, 9]
 
-    上上期有初学编程的同学用了一个很优雅的办法, 我就想不到
-    */
-    
+  上上期有初学编程的同学用了一个很优雅的办法, 我就想不到
+  */
+
 }
 
 
 // 作业 14
-var markedLine = function(array) {
-    /*
-    array 是一个只包含了 0 9 的 array
-    返回一个标记过的 array
-    ** 注意, 使用一个新数组来存储结果, 不要直接修改老数组
-    复制数组用 array.slice(0) 实现
+var markedLine = function (array) {
+  /*
+  array 是一个只包含了 0 9 的 array
+  返回一个标记过的 array
+  ** 注意, 使用一个新数组来存储结果, 不要直接修改老数组
+  复制数组用 array.slice(0) 实现
 
-    标记规则如下
-    对于下面这样的 array
-    [0, 0, 9, 0, 9]
-    标记后是这样
-    [0, 1, 9, 2, 9]
+  标记规则如下
+  对于下面这样的 array
+  [0, 0, 9, 0, 9]
+  标记后是这样
+  [0, 1, 9, 2, 9]
 
-    规则是, 0 会被设置为左右两边 9 的数量
-    */
-   
+  规则是, 0 会被设置为左右两边 9 的数量
+  */
+
 }
 
 
 // 作业 15
 // 复制一个 square
-var clonedSquare = function(array) {
-    var s = []
-    for (var i = 0; i < array.length; i++) {
-        var line = []
-        for (var j = 0; j < array[i].length; j++) {
-            line.push(array[i][j])
-        }
-        s.push(line)
+var clonedSquare = function (array) {
+  var s = []
+  for (var i = 0; i < array.length; i++) {
+    var line = []
+    for (var j = 0; j < array[i].length; j++) {
+      line.push(array[i][j])
     }
-    return s
+    s.push(line)
+  }
+  return s
 }
 
 // 辅助函数, 给数字 +1
 // 这里会判断下标是否合法
-var plus1 = function(array, x, y) {
-    var n = array.length
-    if (x >= 0 && x < n && y >= 0 && y < n) {
-        if (array[x][y] !== 9) {
-            array[x][y] += 1
-        }
+var plus1 = function (array, x, y) {
+  var n = array.length
+  if (x >= 0 && x < n && y >= 0 && y < n) {
+    if (array[x][y] !== 9) {
+      array[x][y] += 1
     }
+  }
 }
 
 // 辅助函数, 用来给 9 周边的 8 个格子 +1
-var markAround = function(array, x, y) {
-    /*
-    ###
-    #+#
-    ###
-    */
-    if (array[x][y] === 9) {
-        // 左边 3 个
-        plus1(array, x - 1, y - 1)
-        plus1(array, x - 1, y)
-        plus1(array, x - 1, y + 1)
-        // 上下 2 个
-        plus1(array, x, y - 1)
-        plus1(array, x, y + 1)
-        // 右边 3 个
-        plus1(array, x + 1, y - 1)
-        plus1(array, x + 1, y)
-        plus1(array, x + 1, y + 1)
-    }
+var markAround = function (array, x, y) {
+  /*
+  ###
+  #+#
+  ###
+  */
+  if (array[x][y] === 9) {
+    // 左边 3 个
+    plus1(array, x - 1, y - 1)
+    plus1(array, x - 1, y)
+    plus1(array, x - 1, y + 1)
+    // 上下 2 个
+    plus1(array, x, y - 1)
+    plus1(array, x, y + 1)
+    // 右边 3 个
+    plus1(array, x + 1, y - 1)
+    plus1(array, x + 1, y)
+    plus1(array, x + 1, y + 1)
+  }
 }
 
-var markedSquare = function(array) {
-    /*
-    array 是一个「包含了『只包含了 0 9 的 array』的 array」
-    返回一个标记过的 array
-    ** 注意, 使用一个新数组来存储结果, 不要直接修改老数组
+var markedSquare = function (array) {
+  /*
+  array 是一个「包含了『只包含了 0 9 的 array』的 array」
+  返回一个标记过的 array
+  ** 注意, 使用一个新数组来存储结果, 不要直接修改老数组
 
-    范例如下, 这是 array
-    [
-        [0, 9, 0, 0],
-        [0, 0, 9, 0],
-        [9, 0, 9, 0],
-        [0, 9, 0, 0],
-    ]
+  范例如下, 这是 array
+  [
+      [0, 9, 0, 0],
+      [0, 0, 9, 0],
+      [9, 0, 9, 0],
+      [0, 9, 0, 0],
+  ]
 
-    这是标记后的结果
-    [
-        [1, 9, 2, 1],
-        [2, 4, 9, 2],
-        [9, 4, 9, 2],
-        [2, 9, 2, 1],
-    ]
+  这是标记后的结果
+  [
+      [1, 9, 2, 1],
+      [2, 4, 9, 2],
+      [9, 4, 9, 2],
+      [2, 9, 2, 1],
+  ]
 
-    规则是, 0 会被设置为四周 8 个元素中 9 的数量
-    */
-    var square = clonedSquare(array)
-    for (var i = 0; i < square.length; i++) {
-        var line = square[i]
-        for (var j = 0; j < line.length; j++) {
-            markAround(square, i, j)
-        }
+  规则是, 0 会被设置为四周 8 个元素中 9 的数量
+  */
+  var square = clonedSquare(array)
+  for (var i = 0; i < square.length; i++) {
+    var line = square[i]
+    for (var j = 0; j < line.length; j++) {
+      markAround(square, i, j)
     }
-    return square
+  }
+  return square
 }
 
 // 变量取名

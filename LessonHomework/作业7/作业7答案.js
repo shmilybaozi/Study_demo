@@ -112,6 +112,7 @@ var split = function(s, delimiter=' ') {
     l.push(s.slice(start))
     return l
 }
+console.log( 'split', split('1 2 3'));
 
 
 // 作业 3
