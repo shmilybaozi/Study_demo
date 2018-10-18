@@ -61,7 +61,7 @@ var join = function (delimiter, array) {
   var str = array[0]
   for (let i = 1; i < array.length; i++) {
     const el = array[i];
-    str = str + delimiter + el
+    str += (delimiter + el)
   }
   return str
 }
@@ -78,7 +78,7 @@ var split = function (s, delimiter = ' ') {
   例如
   split('1 2 3') 返回 ['1', '2', '3']
   split('a=b&c=d', '&') 返回 ['a=b', 'c=d']
-  注意, 测试 array 是否相等得自己写一个函数用循环来跑
+  NOTE:测试 array 是否相等得自己写一个函数用循环来跑
 
    0123456789
   'a=bc=def'
@@ -103,7 +103,6 @@ var split = function (s, delimiter = ' ') {
   }
   var last = s.slice(start)
   arr.push(last)
-  console.log(arr);
   return arr
 }
 
@@ -117,7 +116,9 @@ var replaceAll = function (s, old, newString) {
   返回一个「将 s 中出现的所有 old 字符串替换为 new 字符串」的字符串
   */
   // 很简单, 对吧?
-
+  var s1 = split(s, old)
+  var s2 = join(newString, s1)
+  return s2
 }
 
 
@@ -135,9 +136,17 @@ var str1 = function (n) {
   1-n
   (n-1)-1
   */
-
+  var s = ''
+  // 左边
+  for (let i = 0; i < n; i++) {
+    s += String(i+1)
+  }
+  // 右边
+  for (let i = n-1; i > 0; i--) {
+    s += String(i)
+  }
+  return s
 }
-
 
 // 作业 5
 // 实现函数
@@ -150,9 +159,18 @@ var str2 = function (n) {
   2       'ABA'
   3       'ABCBA'
   */
-
+  var upper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+  var s = ''
+  // 左边
+  for (let i = 0; i < n; i++) {
+    s += upper[i]
+  }
+  // 右边
+  for (let i = n-2; i >= 0; i--) {
+    s += upper[i]
+  }
+  return s
 }
-
 
 // 作业 6
 // 实现加法口诀表
@@ -178,8 +196,16 @@ var addTable = function () {
       '3 + 1 = 4  3 + 2 = 5  3 + 3 = 6',
   ]
   */
-
+  var table = []
+  for (let i = 1; i <= 9; i++) {
+    var line = addLine(i)
+    table.push(line)
+  }
+  return table
 }
+
+log(join('\n', addTable()))
+
 
 
 // 作业 7
@@ -191,9 +217,12 @@ var range1 = function (start, end) {
   返回一个 array, 假设 start 为 1, end 为 5, 返回数据如下
   [1, 2, 3, 4]
   */
-
+  var arr = []
+  for (let i = start; i < end; i++) {
+    arr.push(i)
+  }
+  return arr
 }
-
 
 // 作业 8
 // 实现函数
@@ -208,9 +237,12 @@ var range2 = function (start, end, step = 1) {
   假设 start=0, end=6, step=2 返回数据如下
   [0, 2, 4]
   */
-
+  var arr = []
+  for (let i = start; i < end; i += step) {
+    arr.push(i + step)
+  }
+  return arr
 }
-
 
 // 作业 9
 // 实现函数
